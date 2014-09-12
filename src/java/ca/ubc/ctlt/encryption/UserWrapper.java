@@ -73,7 +73,7 @@ public class UserWrapper extends User {
         if (isRandomEmailName) {
             // generate a random string for email name. Using 25 characters to avoid collision with the really ones.
             // Gmail allow 30 max.
-            email[0] = new String(Hex.encodeHex(Encryption.hashKey(email[0]))).substring(0, 25);
+            email[0] = Encryption.hashEmail(email[0]);
         } else {
             // or encrypt the email name
             email[0] = encryptor.encrypt(email[0]);

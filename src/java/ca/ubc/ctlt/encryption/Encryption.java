@@ -1,6 +1,7 @@
 package ca.ubc.ctlt.encryption;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.Hex;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -246,5 +247,16 @@ public class Encryption {
      */
     public static byte[] hashKey(String original) {
         return hash(original, 16);
+    }
+
+    /**
+     * generate a random string for email name. Using 25 characters to avoid collision with the really ones.
+     * Gmail allow 30 max.
+     *
+     * @param email
+     * @return hashed email address
+     */
+    public static String hashEmail(String email) {
+        return new String(Hex.encodeHex(Encryption.hashKey(email))).substring(0, 25);
     }
 }
